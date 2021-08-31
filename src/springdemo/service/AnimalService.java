@@ -7,4 +7,6 @@ import springdemo.entity.Animal;
 public interface AnimalService {
 
 	public List<Animal> getAnimals();
+
+	public void saveAnimal(Animal theAnimal);
 }

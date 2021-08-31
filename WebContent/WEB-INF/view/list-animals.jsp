@@ -22,6 +22,13 @@
 		<div id="container">
 			<div id="content">
 				
+				<!-- add annimal button -->
+				<input type="button" value="Add an animal"
+					onclick="window.location.href='showAddAnimalForm'; return false;"
+					class="add-button"
+				/>
+				
+				<!-- html table -->
 				<table>
 					<tr>
 						<th>Name</th>

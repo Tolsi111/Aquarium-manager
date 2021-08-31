@@ -21,15 +21,23 @@ public class AnimalDAOImplementation implements AnimalDAO {
 		///get current session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		///create query
+		///create query ... sort by name
 		Query<Animal> theQuery=
-	            currentSession.createQuery("from Animal", Animal.class);
+	            currentSession.createQuery("from Animal order by name", Animal.class);
 		
 		///execute and get customers
 		List<Animal> animals = theQuery.getResultList();
 		
 		///return customers
 		return animals;
+	}
+
+	@Override
+	public void saveAnimal(Animal theAnimal) {
+		///get current session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		currentSession.save(theAnimal);
 	}
 
 }

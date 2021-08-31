@@ -19,7 +19,13 @@ public class AnimalServiceImplementation implements AnimalService {
 	@Override
 	@Transactional
 	public List<Animal> getAnimals() {
-		return animalDao.getAnimals();
+		return animalDao.getAnimals();	
+	}
+
+	@Override
+	@Transactional
+	public void saveAnimal(Animal theAnimal) {
+		animalDao.saveAnimal(theAnimal);
 	}
 
 }
