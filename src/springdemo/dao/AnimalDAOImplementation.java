@@ -2,8 +2,6 @@ package springdemo.dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -19,7 +17,6 @@ public class AnimalDAOImplementation implements AnimalDAO {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	@Transactional
 	public List<Animal> getAnimals() {
 		///get current session
 		Session currentSession = sessionFactory.getCurrentSession();

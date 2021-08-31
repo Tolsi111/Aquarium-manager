@@ -5,23 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import springdemo.dao.AnimalDAO;
 import springdemo.entity.Animal;
+import springdemo.service.AnimalService;
 
 @Controller
 @RequestMapping("/animal")
 public class AnimalController {
 	
-	///inject animal dao
+	///inject AnimalService
 	@Autowired
-	private AnimalDAO animalDAO;
+	private AnimalService animalService;
 	
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public String listCustomers(Model theModel) {
 		///get animals from dao
-		List<Animal> theAnimals = animalDAO.getAnimals();
+		List<Animal> theAnimals = animalService.getAnimals();
 		
 		///add animals to the model
 		theModel.addAttribute("animals",theAnimals);
