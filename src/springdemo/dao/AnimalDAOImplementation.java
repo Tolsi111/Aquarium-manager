@@ -37,7 +37,30 @@ public class AnimalDAOImplementation implements AnimalDAO {
 		///get current session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		currentSession.save(theAnimal);
+		///save or update if the PK is not null
+		currentSession.saveOrUpdate(theAnimal);
+	}
+
+	@Override
+	public Animal getAnimal(int theId) {
+		///get current session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		return currentSession.get(Animal.class,theId);
+	}
+
+	@Override
+	public void deleteAnimal(int theId) {
+		///get current session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		///delete object using primary key
+		Query theQuery = currentSession.createQuery("delete from Animal where id=:animalId");
+		theQuery.setParameter("animalId",theId);
+		
+		///execute query
+		theQuery.executeUpdate();
+		
 	}
 
 }

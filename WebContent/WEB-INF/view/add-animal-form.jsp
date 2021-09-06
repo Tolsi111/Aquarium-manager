@@ -27,6 +27,10 @@
 		<h3>Add An Animal</h3>
 		
 		<form:form action="saveAnimal" modelAttribute="animal" method="POST">
+		
+			<!-- need to associate this data with animal id -->
+			<form:hidden path="id" />
+			
 			<table>
 				<tbody>
 					<tr>
@@ -42,7 +46,7 @@
 						<td><form:input path="personality" /></td>
 					</tr>
 					<tr>
-						<td><label>Personality</label></td>
+						<td></td>
 						<td><input type="submit" value="Save" class="save"/></td>
 					</tr>
 				</tbody>

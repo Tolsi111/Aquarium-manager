@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import springdemo.entity.Animal;
 import springdemo.service.AnimalService;
@@ -48,6 +49,26 @@ public class AnimalController {
 		
 		///save the animal using AnimalService
 		animalService.saveAnimal(theAnimal);
+		
+		return "redirect:/animal/list";
+	}
+	
+	@GetMapping("/showUpdateAnimalForm")
+	public String showUpdateAnimalForm(@RequestParam("animalId") int theId, Model theModel) {
+		///get animal from service
+		Animal theAnimal = animalService.getAnimal(theId);
+		
+		///set the animal as a model attribute to prepopulate the form
+		theModel.addAttribute("animal",theAnimal);///name, value
+		
+		///send over to form
+		return "add-animal-form";		
+	}
+	
+	@GetMapping("/deleteAnimal")
+	public String deleteAnimal(@RequestParam("animalId") int theId) {
+		
+		animalService.deleteAnimal(theId);
 		
 		return "redirect:/animal/list";
 	}

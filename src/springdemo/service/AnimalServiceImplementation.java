@@ -28,4 +28,16 @@ public class AnimalServiceImplementation implements AnimalService {
 		animalDao.saveAnimal(theAnimal);
 	}
 
+	@Override
+	@Transactional
+	public Animal getAnimal(int theId) {
+		return animalDao.getAnimal(theId);
+	}
+
+	@Override
+	@Transactional
+	public void deleteAnimal(int theId) {
+		animalDao.deleteAnimal(theId);		
+	}
+
 }

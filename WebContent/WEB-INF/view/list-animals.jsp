@@ -34,13 +34,28 @@
 						<th>Name</th>
 						<th>Age</th>
 						<th>Personality</th>
+						<th>Action</th>
 					</tr>
 					
 					<c:forEach var="tempAnimal" items="${animals}">
+					
+					<!-- Create update link with customer id -->
+					<c:url var="updateLink" value="/animal/showUpdateAnimalForm">
+						<c:param name="animalId" value="${tempAnimal.id}"/>
+					</c:url>
+					
+					<!-- Create delete link -->
+					<c:url var="deleteLink" value="/animal/deleteAnimal">
+						<c:param name="animalId" value="${tempAnimal.id}"/>
+					</c:url>
+					
 					<tr>
 						<td>${tempAnimal.name}</td>
 						<td>${tempAnimal.age}</td>
 						<td>${tempAnimal.personality}</td>
+						<td>
+							<a href="${updateLink}">Update</a>|<a href="${deleteLink}" onclick="if (!(confirm('Are you sure you wish to delete this animal?'))) return false">Delete</a>
+						</td>
 					</tr>
 					</c:forEach>
 					
