@@ -40,4 +40,10 @@ public class AnimalServiceImplementation implements AnimalService {
 		animalDao.deleteAnimal(theId);		
 	}
 
+	@Override
+	@Transactional
+	public List<Animal> searchAnimals(String theSearchName) {
+		return animalDao.searchAnimals(theSearchName);
+	}
+
 }

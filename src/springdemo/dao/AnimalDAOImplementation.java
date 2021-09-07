@@ -63,4 +63,33 @@ public class AnimalDAOImplementation implements AnimalDAO {
 		
 	}
 
+	@Override
+	public List<Animal> searchAnimals(String theSearchName) {
+		// get the current session
+        Session currentSession = sessionFactory.getCurrentSession();
+        
+        Query theQuery = null;
+        
+        //
+        // only search by name if theSearchName is not empty
+        //
+        if (theSearchName != null && theSearchName.trim().length() > 0) {
+            // search for firstName or lastName ... case insensitive
+            theQuery =currentSession.createQuery("from Animal where lower(name) like :theName", Animal.class);
+            theQuery.setParameter("theName", "%" + theSearchName.toLowerCase() + "%");
+        }
+        else {
+            // theSearchName is empty ... so just get all customers
+            theQuery =currentSession.createQuery("from Animal", Animal.class);            
+        }
+        
+        // execute query and get result list
+        List<Animal> animals = theQuery.getResultList();
+                
+        // return the results        
+        return animals;
+        
+    }
 }
+
+

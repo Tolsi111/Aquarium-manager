@@ -72,4 +72,16 @@ public class AnimalController {
 		
 		return "redirect:/animal/list";
 	}
+	
+	@GetMapping("/search")
+    public String searchCustomers(@RequestParam("theSearchName") String theSearchName,
+                                    Model theModel) {
+        // search customers from the service
+        List<Animal> theAnimals = animalService.searchAnimals(theSearchName);
+                
+        // add the customers to the model
+        theModel.addAttribute("animals", theAnimals);
+        
+        return "list-animals";        
+    }
 }

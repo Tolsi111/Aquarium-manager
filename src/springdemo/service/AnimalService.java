@@ -13,4 +13,6 @@ public interface AnimalService {
 	public Animal getAnimal(int theId);
 
 	public void deleteAnimal(int theId);
+
+	public List<Animal> searchAnimals(String theSearchName);
 }

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 
 <html>
@@ -20,6 +21,7 @@
 		</div>
 		
 		<div id="container">
+            
 			<div id="content">
 				
 				<!-- add annimal button -->
@@ -27,6 +29,15 @@
 					onclick="window.location.href='showAddAnimalForm'; return false;"
 					class="add-button"
 				/>
+				<!-- refresh button -->
+				<button onClick="window.location.href='list'; return false;" class="add-button">Refresh List</button>
+				
+				<!-- search animal form -->
+			<form:form action="search" method="GET">
+                Search Animal: <input type="text" name="theSearchName" />
+                
+                <input type="submit" value="Search" class="add-button" />
+            </form:form>
 				
 				<!-- html table -->
 				<table>
