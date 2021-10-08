@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import springdemo.entity.Animal;
+import springdemo.util.SortUtils;
 
 @Repository
 public class AnimalDAOImplementation implements AnimalDAO {
@@ -17,13 +18,29 @@ public class AnimalDAOImplementation implements AnimalDAO {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<Animal> getAnimals() {
+	public List<Animal> getAnimals(int sortField) {
 		///get current session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		///create query ... sort by name
-		Query<Animal> theQuery=
-	            currentSession.createQuery("from Animal order by name", Animal.class);
+		// determine sort field
+		String theFieldName = null;
+				
+		switch (sortField) {
+			case SortUtils.NAME: 
+				theFieldName = "name";
+				break;
+			case SortUtils.AGE:
+				theFieldName = "age";
+				break;
+			default:
+				// if nothing matches the default to sort by lastName
+				theFieldName = "name";
+			}
+				
+		// create a query  
+		String queryString = "from Animal order by " + theFieldName;
+		Query<Animal> theQuery = 
+				currentSession.createQuery(queryString, Animal.class);
 		
 		///execute and get customers
 		List<Animal> animals = theQuery.getResultList();

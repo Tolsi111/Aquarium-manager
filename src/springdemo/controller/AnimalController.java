@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import springdemo.entity.Animal;
 import springdemo.service.AnimalService;
+import springdemo.util.SortUtils;
 
 @Controller
 @RequestMapping("/animal")
@@ -23,13 +24,23 @@ public class AnimalController {
 	private AnimalService animalService;
 	
 	@GetMapping("/list")
-	public String listCustomers(Model theModel) {
-		///get animals from dao
-		List<Animal> theAnimals = animalService.getAnimals();
-		
-		///add animals to the model
-		theModel.addAttribute("animals",theAnimals);
-		
+	public String listCustomers(Model theModel, @RequestParam(required=false) String sort) {
+		// get customers from the service
+		List<Animal> theAnimals = null;
+				
+		// check for sort field
+		if (sort != null) {
+			int theSortField = Integer.parseInt(sort);
+			theAnimals = animalService.getAnimals(theSortField);			
+		}
+		else {
+		// no sort field provided ... default to sorting by last name
+			theAnimals = animalService.getAnimals(SortUtils.NAME);
+		}
+				
+		// add the customers to the model
+		theModel.addAttribute("animals", theAnimals);
+				
 		return "list-animals";
 	}
 	

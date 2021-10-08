@@ -18,8 +18,8 @@ public class AnimalServiceImplementation implements AnimalService {
 	
 	@Override
 	@Transactional
-	public List<Animal> getAnimals() {
-		return animalDao.getAnimals();	
+	public List<Animal> getAnimals(int sortField) {
+		return animalDao.getAnimals(sortField);	
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import springdemo.entity.Animal;
 
 public interface AnimalDAO {
 
-	public List<Animal> getAnimals();
+	public List<Animal> getAnimals(int sortField);
 
 	public void saveAnimal(Animal theAnimal);
 
